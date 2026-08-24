@@ -7,5 +7,4 @@ const VALID_GUESSES = new Set([...ANSWER_WORDS, ...EXTRA_GUESSES]);
 const wordsLoaded = true;
 
 async function loadWords() {
-  console.log(`Loaded ${ANSWER_WORDS.length} answers, ${VALID_GUESSES.size} valid guesses`);
 }
