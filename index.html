@@ -4,22 +4,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HARDLE</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Page Title -->
+  <title>HARDLE Unlimited - Play Hardle with Infinite Puzzles</title>
+
+  <!-- Meta Description - Natural, describes gameplay -->
+  <meta name="description"
+    content="Can you guess the word with only green and orange counts as clues? Play unlimited Hardle puzzles — a harder twist on Wordle!">
+
+  <!-- Keywords -->
+  <meta name="keywords"
+    content="hardle unlimited, hardle practice, hardle infinite, unlimited hardle, hardle game, word puzzle">
+
+  <!-- Search Engine Indexing -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://itjosephk2.github.io/hardle/">
+
+  <!-- Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://itjosephk2.github.io/hardle/">
+  <meta property="og:title" content="HARDLE Unlimited - Infinite Hardle Puzzles">
+  <meta property="og:description"
+    content="A harder Wordle — you only get the count of correct letters, not which ones. Can you figure it out?">
+  <meta property="og:image" content="https://itjosephk2.github.io/hardle/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://itjosephk2.github.io/hardle/">
+  <meta name="twitter:title" content="HARDLE Unlimited - Infinite Hardle Puzzles">
+  <meta name="twitter:description"
+    content="A harder Wordle — you only get the count of correct letters, not which ones. Can you figure it out?">
+  <meta name="twitter:image" content="https://itjosephk2.github.io/hardle/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🟩</text></svg>">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#121213">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Hardle Unlimited",
+        "description": "An unofficial unlimited version of Hardle. Guess a 5-letter word in 10 tries.",
+        "url": "https://itjosephk2.github.io/hardle/",
+        "applicationCategory": "Game",
+        "genre": "Puzzle",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+  </script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
   <div class="container">
     <header>
+      <button id="new-game-btn" onclick="resetGame()">⟳</button>
       <h1>HARDLE</h1>
+      <div class="header-buttons">
+        <button id="stats-btn" onclick="toggleStats()">📊</button>
+        <button id="help-btn" onclick="toggleHelp()">?</button>
+      </div>
     </header>
     <div id="message"></div>
-    <button id="reset-btn" onclick="resetGame()">New Game</button>
     <div id="grid"></div>
     <div id="keyboard"></div>
+
+    <!-- Footer with attribution to original Hardle -->
+    <footer>
+      <p>An unofficial unlimited version of <a href="https://hardle.org" target="_blank" rel="noopener">Hardle</a>.</p>
+      <p>Not affiliated with the original. Go play the <a href="https://hardle.org" target="_blank" rel="noopener">daily
+          Hardle</a> too!</p>
+    </footer>
   </div>
+
+
+
+  <!-- JavaScript disabled fallback -->
+  <noscript>
+    <p style="color: white; text-align: center; padding: 40px;">
+      Hardle requires JavaScript to play. Please enable JavaScript in your browser.
+    </p>
+  </noscript>
+
   <script src="words.js"></script>
   <script src="game.js"></script>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="toggleHelp()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>How to Play</h2>
+        <button class="modal-close" onclick="toggleHelp()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>Guess the <strong>5-letter word</strong> in <strong>10 tries</strong>.</p>
+        <p>After each guess, you'll see the <strong>count</strong> of green and orange matches — but not
+          <em>which</em> letters they are!
+        </p>
+
+        <div class="modal-examples">
+          <div class="modal-example">
+            <span class="example-box green-box">2</span>
+            <span>letters are in the correct position</span>
+          </div>
+          <div class="modal-example">
+            <span class="example-box orange-box">1</span>
+            <span>letter is in the word but wrong position</span>
+          </div>
+        </div>
+
+        <h3>Track your guesses</h3>
+        <p>Click on submitted letters to cycle through:</p>
+        <div class="modal-states">
+          <div class="state-item">
+            <span class="state-tile">A</span>
+            <span>Unchecked</span>
+          </div>
+          <div class="state-arrow">→</div>
+          <div class="state-item">
+            <span class="state-tile gray-tile">A</span>
+            <span>Not in word</span>
+          </div>
+          <div class="state-arrow">→</div>
+          <div class="state-item">
+            <span class="state-tile orange-tile">A</span>
+            <span>Wrong spot</span>
+          </div>
+          <div class="state-arrow">→</div>
+          <div class="state-item">
+            <span class="state-tile green-tile">A</span>
+            <span>Correct</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <p>Based on <a href="https://hardle.org" target="_blank" rel="noopener">Hardle</a> — this is an
+            unofficial unlimited version so you don't have to wait for tomorrow!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Modal -->
+  <div id="stats-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="toggleStats()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Statistics</h2>
+        <button class="modal-close" onclick="toggleStats()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Summary stats -->
+        <div class="stats-summary">
+          <div class="stat-box">
+            <span class="stat-number" id="stat-played">0</span>
+            <span class="stat-label">Played</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="stat-win-pct">0</span>
+            <span class="stat-label">Win %</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="stat-streak">0</span>
+            <span class="stat-label">Streak</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="stat-max-streak">0</span>
+            <span class="stat-label">Best</span>
+          </div>
+        </div>
+
+        <!-- Guess distribution chart -->
+        <h3>Guess Distribution</h3>
+        <div class="guess-distribution" id="guess-distribution"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
