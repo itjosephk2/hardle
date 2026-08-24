@@ -26,7 +26,6 @@ async function init() {
 
   // Pick a random word from the answer list
   secretWord = ANSWER_WORDS[Math.floor(Math.random() * ANSWER_WORDS.length)];
-  console.log("Secret Word: ", secretWord);
 
   createGrid();
   createKeyboard();
